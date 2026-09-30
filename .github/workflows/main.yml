@@ -17,7 +17,17 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build
-        run: echo "Build completed successfully"
+        run: |
+          mkdir build
+          echo "My DevOps application build" > build/app.txt
 
       - name: Test
-        run: echo "Tests completed successfully"
+        run: |
+          test -f build/app.txt
+          echo "Test passed"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-build-artifact
+          path: build/
